@@ -1,23 +1,12 @@
 " Vim color file
-" Maintainer: Henry So, Jr. <henryso@panix.com>
-
-" These are the colors of the "desert" theme by Hans Fugal with a few small
+" These are the colors of the "desert" theme by Henry So, Jr.
+" which were colors of the "desert" theme by Hans Fugal with a few small
 " modifications (namely that I lowered the intensity of the normal white and
 " made the normal and nontext backgrounds black), modified to work with 88-
 " and 256-color xterms.
 "
-" The original "desert" theme is available as part of the vim distribution or
-" at http://hans.fugal.net/vim/colors/.
+" I (Duncan McDougall) have customised these to represent jGrasp
 "
-" The real feature of this color scheme, with a wink to the "inkpot" theme, is
-" the programmatic approximation of the gui colors to the palettes of 88- and
-" 256- color xterms.  The functions that do this (folded away, for
-" readability) are calibrated to the colors used for Thomas E. Dickey's xterm
-" (version 200), which is available at http://dickey.his.com/xterm/xterm.html.
-"
-" I struggled with trying to parse the rgb.txt file to avoid the necessity of
-" converting color names to #rrggbb form, but decided it was just not worth
-" the effort.  Maybe someone seeing this may decide otherwise...
 
 set background=dark
 if version > 580
@@ -33,7 +22,7 @@ let g:colors_name="duncan"
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
     " functions {{{
     " returns an approximate grey index for the given grey level
-    fun <SID>grey_number(x)
+    fun! <SID>grey_number(x)
         if &t_Co == 88
             if a:x < 23
                 return 0
@@ -72,7 +61,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns the actual grey level represented by the grey index
-    fun <SID>grey_level(n)
+    fun! <SID>grey_level(n)
         if &t_Co == 88
             if a:n == 0
                 return 0
@@ -105,7 +94,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns the palette index for the given grey index
-    fun <SID>grey_color(n)
+    fun! <SID>grey_color(n)
         if &t_Co == 88
             if a:n == 0
                 return 16
@@ -126,7 +115,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns an approximate color index for the given color level
-    fun <SID>rgb_number(x)
+    fun! <SID>rgb_number(x)
         if &t_Co == 88
             if a:x < 69
                 return 0
@@ -153,7 +142,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns the actual color level for the given color index
-    fun <SID>rgb_level(n)
+    fun! <SID>rgb_level(n)
         if &t_Co == 88
             if a:n == 0
                 return 0
@@ -174,7 +163,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns the palette index for the given R/G/B color indices
-    fun <SID>rgb_color(x, y, z)
+    fun! <SID>rgb_color(x, y, z)
         if &t_Co == 88
             return 16 + (a:x * 16) + (a:y * 4) + a:z
         else
@@ -183,7 +172,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns the palette index to approximate the given R/G/B color levels
-    fun <SID>color(r, g, b)
+    fun! <SID>color(r, g, b)
         " get the closest grey
         let l:gx = <SID>grey_number(a:r)
         let l:gy = <SID>grey_number(a:g)
@@ -218,7 +207,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " returns the palette index to approximate the 'rrggbb' hex string
-    fun <SID>rgb(rgb)
+    fun! <SID>rgb(rgb)
         let l:r = ("0x" . strpart(a:rgb, 0, 2)) + 0
         let l:g = ("0x" . strpart(a:rgb, 2, 2)) + 0
         let l:b = ("0x" . strpart(a:rgb, 4, 2)) + 0
@@ -227,7 +216,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
 
     " sets the highlighting for the given group
-    fun <SID>X(group, fg, bg, attr)
+    fun! <SID>X(group, fg, bg, attr)
         if a:fg != ""
             exec "hi " . a:group . " guifg=#" . a:fg . " ctermfg=" . <SID>rgb(a:fg)
         endif
