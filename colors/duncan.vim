@@ -275,8 +275,8 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Type", "f73eee", "", "none")
     call <SID>X("Special", "cfca22", "", "")
     call <SID>X("cCustomClass", "98d9fa", "", "")
-    hi link cCustomAngleBrackets cCustomClass
-    " call <SID>X("cCustomAngleBrackets", "c0ffc0", "", "")
+    " hi link cCustomAngleBrackets cCustomClass
+    call <SID>X("cCustomAngleBracketContent", "c0ffc0", "", "")
     "Underlined
     call <SID>X("Ignore", "666666", "", "")
     "Error
