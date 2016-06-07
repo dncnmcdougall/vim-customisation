@@ -1,0 +1,50 @@
+# for
+snippet for_int
+alias for
+abbr for ( int i )
+options head
+    for ( int ${1:i} = 0; $1 <  ${2}; $1++ )
+    {
+        ${0}
+    }
+
+# for each
+snippet for_each
+abbr for ( i : thing )
+options head
+    for ( ${1:auto} ${2:var} : ${3:collection} )
+    {
+        ${0}
+    }
+
+# Code Review Comment
+snippet CRCdmd
+alias CRC
+options head
+    // CRC: dmd: ${0}
+# TODO
+snippet TODOdmd
+alias TODO
+options head
+    // TODO: dmd $0
+
+# Debug
+snippet DBGdmd
+alias DBG
+options head
+    qDebug()<<"DBG: dmd: $0";
+
+snippet class
+options head
+    #pragma once
+    
+    class ${1:ClassName}
+    {
+    public: 
+        $1(${2});
+        ${3:virtual} ~$1();
+
+    	${0}
+    private:
+    
+    };
