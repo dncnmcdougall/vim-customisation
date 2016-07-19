@@ -19,32 +19,76 @@ options head
 
 # Code Review Comment
 snippet CRCdmd
-alias CRC
+alias CRC //CRC //CRCdmd
 options head
     // CRC: dmd: ${0}
 # TODO
 snippet TODOdmd
 alias TODO
 options head
-    // TODO: dmd $0
+    // TODO: dmd: ${0}
 
 # Debug
 snippet DBGdmd
 alias DBG
 options head
-    qDebug()<<"DBG: dmd: $0";
+    qDebug()<<"DBG: dmd: ${0}";
 
 snippet class
 options head
     #pragma once
     
-    class ${1:ClassName}
+    class ${1:`toupper(expand("%:h:h:t"))`_EXPORT} ${2:`expand("%:t:r")`}
     {
     public: 
-        $1(${2});
-        ${3:virtual} ~$1();
+        $2(${3});
+        virtual ~$2();
 
     	${0}
     private:
     
     };
+
+snippet test
+options head
+    #include "unitdoc.h"
+
+    #include "${1:`expand("%:t:r:r")`}.h"
+
+    UD_CLASS($1, "${2}")
+    {
+        ${0}
+    }
+
+    UD_METHOD($1, $1, "${3}")
+    {
+    }
+
+snippet cpp
+options head
+    #include "${1:`expand("%:t:r")`}.h"
+
+    ${2:// ----- STATICS -----}
+
+    // ----- CONSTRUCTOR & DESTRUCTOR -----
+    $1::$1(${3})
+    {
+    }
+
+    $1::~$1(${4})
+    {
+    }
+
+    // ----- PUBLIC METHODS -----
+
+    ${0}
+
+    // ----- PROTECTED METHODS -----
+
+    // ----- PRIVATE METHODS -----
+
+snippet method
+options head
+    ${1:void} ${2:`expand("%:t:r")`}::${3}(${0})
+    {
+    }

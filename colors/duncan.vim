@@ -6,9 +6,7 @@
 " and 256-color xterms.
 "
 " I (Duncan McDougall) have customised these to represent jGrasp
-"
 
-set background=dark
 if version > 580
     " no guarantees for version 5.8 and below, but this makes it stop
     " complaining
@@ -229,11 +227,66 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
     " }}}
 
-    call <SID>X("Normal", "ffffff", "000000", "")
+    if &background == "dark"
+        let contrast    ="ffffff"
+        let contrastDull="f5deb3"
+
+        let base    ="000000"
+        let baseDDull="444444"
+        let baseDull="222222"
+
+        let red     ="ff4040"
+        let yellow  ="fff555"
+        let orange  ="fc7711"
+        let green   ="00cb00"
+        let cyan    ="00afaf"
+        let blue    ="40bfff"
+        let magenta ="f73eee"
+        let violet  ="a64dff"
+
+        let redDull     ="d75656"
+        let redDark     ="bf3030"
+        let yellowDull  ="cd853f"
+        let greenDull   ="c0ffc0"
+        let blueDull    ="308fbf"
+        let blueLight   ="99ddff"
+        let violetDull  ="a299ff"
+    else
+        let contrast    ="808080"
+        let contrastDull="8a8a8a"
+
+        let base    ="ffffe7"
+        let baseDull="e5e5bf"
+        let baseDDull="d7d7bf"
+
+        let red     ="ff4040"
+        let yellow  ="af8700"
+        let orange  ="d75f00"
+        let green   ="5dba00"
+        let cyan    ="00afaf"
+        let blue    ="0087ff"
+        let magenta ="af005f"
+        let violet  ="5f5faf"
+
+        let redDull     ="ff6666"
+        let redDark     ="bf3030"
+        let yellowDull  ="cd853f"
+        let greenDull   ="5f8700"
+        let blueDull    ="40a5ff"
+        let blueLight   ="99ddff"
+        let violetDull  ="a299ff"
+
+    endif
+
+
+    call <SID>X("Normal", contrast, base, "")
 
     " highlight groups
-    call <SID>X("Cursor", "708090", "f0e68c", "")
-    call <SID>X("CursorLine","","1a1a1a","NONE")
+    call <SID>X("Cursor", "", "", "reverse")
+    call <SID>X("CursorNC", "", "", "")
+    hi link TermCursor Cursor
+    hi link TermCursorNC CursorNC
+    "CursorLine
     "CursorIM
     "Directory
     "DiffAdd
@@ -241,82 +294,54 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     "DiffDelete
     "DiffText
     "ErrorMsg
-    call <SID>X("VertSplit", "c2bfa5", "7f7f7f", "reverse")
-    call <SID>X("Folded", "00ffd7", "4d4d4d", "")
-    call <SID>X("FoldColumn", "d2b48c", "4d4d4d", "")
-    call <SID>X("IncSearch", "708090", "f0e68c", "")
-    call <SID>X("LineNr","ffdd00","222222","")
-    call <SID>X("ModeMsg", "daa520", "", "")
-    call <SID>X("MoreMsg", "2e8b57", "", "")
-    call <SID>X("NonText", "addbe7", "000000", "bold")
-    call <SID>X("Question", "00ff7f", "", "")
-    call <SID>X("Search", "f5deb3", "cd853f", "")
-    call <SID>X("SpecialKey", "9acd32", "", "")
-    call <SID>X("StatusLine", "b2cfc5", "ffffff", "reverse")
-    call <SID>X("StatusLineNC", "c2bfa5", "ffffff", "reverse")
-    call <SID>X("Title", "cd5c5c", "", "")
-    call <SID>X("Visual", "", "222222", "reverse")
+    call <SID>X("VertSplit", contrast, contrast, "NONE")
+    call <SID>X("Folded",contrast,baseDDull, "")
+    call <SID>X("FoldColumn",contrast,baseDDull, "")
+    call <SID>X("Search",contrastDull, yellowDull, "")
+    call <SID>X("IncSearch",orange, base, "")
+    call <SID>X("LineNr", contrastDull, baseDDull,"")
+    call <SID>X("ModeMsg",yellowDull, "", "")
+    call <SID>X("MoreMsg",greenDull, "", "")
+    call <SID>X("NonText",contrastDull, base, "bold")
+    call <SID>X("Question",green, "", "")
+    call <SID>X("SpecialKey",green, "", "")
+    " call <SID>X("StatusLine", "b2cfc5", base, "reverse")
+    " call <SID>X("StatusLineNC", "c2bfa5", base, "reverse")
+    call <SID>X("Title",redDull, "", "")
+    call <SID>X("Visual", "",base, "reverse")
     "VisualNOS
-    call <SID>X("WarningMsg", "fa8072", "", "")
+    call <SID>X("WarningMsg",red, "", "")
     "WildMenu
     "Menu
     "Scrollbar
     "Tooltip
 
     " syntax highlighting groups
-    "call <SID>X("Function", "98A8fA", "", "")
-    call <SID>X("Function", "9cacfa", "", "")
-    call <SID>X("Comment", "fc7711", "", "")
-    call <SID>X("Constant", "ff4040", "", "")
-    call <SID>X("String","00cb00","","")
-    call <SID>X("Identifier", "99ff99", "", "none")
-    call <SID>X("Statement", "9f4fff", "", "bold")
-    call <SID>X("PreProc", "fff555", "", "")
-    call <SID>X("Type", "f73eee", "", "none")
-    call <SID>X("Special", "cfca22", "", "")
-    call <SID>X("cCustomClass", "98d9fa", "", "")
+    call <SID>X("Function", violetDull, "", "")
+    call <SID>X("Comment", orange, "", "")
+    call <SID>X("Constant", red, "", "")
+    call <SID>X("String", green,"","")
+    call <SID>X("Identifier",greenDull, "", "none")
+    call <SID>X("Statement", violet, "", "bold")
+    call <SID>X("PreProc", yellow, "", "")
+    call <SID>X("Type", magenta, "", "none")
+    call <SID>X("Special", yellow, "", "")
+    call <SID>X("cCustomClass", blueLight, "", "")
     " hi link cCustomAngleBrackets cCustomClass
-    call <SID>X("cCustomAngleBracketContent", "c0ffc0", "", "")
+    call <SID>X("cCustomAngleBracketContent", greenDull, "", "")
     "Underlined
-    call <SID>X("Ignore", "666666", "", "")
+    call <SID>X("Ignore", baseDDull, "", "")
     "Error
-    call <SID>X("Todo", "ff4500", "eeee00", "")
+    call <SID>X("Todo", red, yellow, "")
+    call <SID>X("SpellBad", "", redDull, "")
+    call <SID>X("SpellCap", "",blueDull, "")
+    " call <SID>X("SpellRare", "",magenta, "")
+
+    " Indent guids
+    call <SID>X("IndentGuidesOdd", "", base, "")
+    call <SID>X("IndentGuidesEven", "",baseDull, "")
 else
-    " color terminal definitions
-    hi SpecialKey    ctermfg=darkgreen
-    hi NonText       cterm=bold ctermfg=darkblue
-    hi Directory     ctermfg=darkcyan
-    hi ErrorMsg      cterm=bold ctermfg=7 ctermbg=1
-    hi IncSearch     cterm=NONE ctermfg=yellow ctermbg=green
-    hi Search        cterm=NONE ctermfg=grey ctermbg=blue
-    hi MoreMsg       ctermfg=darkgreen
-    hi ModeMsg       cterm=NONE ctermfg=brown
-    hi LineNr        ctermfg=3
-    hi Question      ctermfg=green
-    hi StatusLine    cterm=bold,reverse
-    hi StatusLineNC  cterm=reverse
-    hi VertSplit     cterm=reverse
-    hi Title         ctermfg=5
-    hi Visual        cterm=reverse
-    hi VisualNOS     cterm=bold,underline
-    hi WarningMsg    ctermfg=1
-    hi WildMenu      ctermfg=0 ctermbg=3
-    hi Folded        ctermfg=darkgrey ctermbg=NONE
-    hi FoldColumn    ctermfg=darkgrey ctermbg=NONE
-    hi DiffAdd       ctermbg=4
-    hi DiffChange    ctermbg=5
-    hi DiffDelete    cterm=bold ctermfg=4 ctermbg=6
-    hi DiffText      cterm=bold ctermbg=1
-    hi Comment       ctermfg=darkcyan
-    hi Constant      ctermfg=brown
-    hi Special       ctermfg=5
-    hi Identifier    ctermfg=6
-    hi Statement     ctermfg=3
-    hi PreProc       ctermfg=5
-    hi Type          ctermfg=2
-    hi Underlined    cterm=underline ctermfg=5
-    hi Ignore        ctermfg=darkgrey
-    hi Error         cterm=bold ctermfg=7 ctermbg=1
+    echo "Requires 256 colours"
 endif
 
 " vim: set fdl=0 fdm=marker:
