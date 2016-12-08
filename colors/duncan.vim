@@ -327,8 +327,10 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Type", magenta, "", "none")
     call <SID>X("Special", yellow, "", "")
     call <SID>X("cCustomClass", blueLight, "", "")
+    call <SID>X("cCustomNamespace", blueLight, "", "")
     " hi link cCustomAngleBrackets cCustomClass
     call <SID>X("cCustomAngleBracketContent", greenDull, "", "")
+    call <SID>X("cCustomAngleBrackets", greenDull, "", "bold")
     "Underlined
     call <SID>X("Ignore", baseDDull, "", "")
     "Error
