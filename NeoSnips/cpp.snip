@@ -1,15 +1,16 @@
 # for
 snippet for_int
-alias for
+alias fori
 abbr for ( int i )
 options head
-    for ( int ${1:i} = 0; $1 <  ${2}; ++$1 )
+    for ( int ${1:i} = 0; $1 < ${2}; ++$1 )
     {
         ${0}
     }
 
 # for each
 snippet for_each
+alias fore
 abbr for ( i : thing )
 options head
     for ( ${1:auto} ${2:var} : ${3:collection} )
@@ -18,15 +19,19 @@ options head
     }
 
 # Code Review Comment
-snippet CRCdmd
-alias CRC //CRC //CRCdmd
+snippet //CRCdmd
+alias //CRC 
 options head
-    // CRC: dmd: ${0}
+    // CRC_${1}: dmd: ${0}
+
+snippet CRCdmd
+alias CRC 
+    CRC_${1}: dmd: ${0}
 # TODO
 snippet TODOdmd
 alias TODO
 options head
-    // TODO: dmd: ${0}
+    // TODO_${1}: dmd: ${0}
 # Do nothing
 snippet DoNothing
 alias Do
@@ -41,31 +46,43 @@ options head
 
 snippet toString
 options head
-    QString ${2:`expand("%:t:r")`}::toString() const ${0}
-    {
-         return "$2";
-    }
+    qDebug()<<"DBG: dmd: $0"<<core::ToString::toString(${0});
+
+snippet coreDBG
+alias coreDBG
+options head
+    core::debug()<<"DBG: dmd: ${0}";
 
 snippet class
 options head
     #pragma once
+
+    namespace altair {
+    namespace feko {
+    namespace ${1:`expand("%:h:t")`} {
     
-    class ${1:`toupper(expand("%:h:h:t"))`_EXPORT} ${2:`expand("%:t:r")`}
+    class ${2:`toupper(expand("%:h:t"))`_EXPORT} ${3:`expand("%:t:r")`}
     {
     public: 
-        $2(${3});
-        virtual ~$2();
+        $3(${4});
+        virtual ~$3();
 
     	${0}
     private:
     
     };
 
+    } // end namespace $1
+    } // end namespace feko
+    } // end namespace altair
+
 snippet test
 options head
-    #include "unitdoc.h"
+    #include "unitdoc/unitdoc.h"
 
     #include "${1:`expand("%:t:r:r")`}.h"
+
+    using namespace altair::feko;
 
     UD_CLASS($1, "${2}")
     {
@@ -78,16 +95,20 @@ options head
 
 snippet cpp
 options head
-    #include "${1:`expand("%:t:r")`}.h"
+    #include "${1:`expand("%:h:h:t")`}/${2:`expand("%:t:r")`}.h"
 
-    ${2:// ----- STATICS -----}
+    namespace altair {
+    namespace feko {
+    namespace $1 {
+
+    ${3:// ----- STATICS -----}
 
     // ----- CONSTRUCTOR & DESTRUCTOR -----
-    $1::$1(${3})
+    $2::$2(${4})
     {
     }
 
-    $1::~$1(${4})
+    $2::~$2(${5})
     {
     }
 
@@ -98,6 +119,10 @@ options head
     // ----- PROTECTED METHODS -----
 
     // ----- PRIVATE METHODS -----
+
+    } // end namespace $1
+    } // end namespace feko
+    } // end namespace altair
 
 snippet method
 options head
