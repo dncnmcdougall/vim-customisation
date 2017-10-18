@@ -93,6 +93,16 @@ options head
     {
     }
 
+snippet cppExp
+options head
+    `execute('echo system("python /home/duncan/Scratch/snippet/cpp.py ".FSReturnReadableCompanionFilename('."'%'".')) ')`
+    `execute('redraw!')`
+
+snippet testExp
+options head
+    `execute('echo system("python /home/duncan/Scratch/snippet/test.py ".FSReturnReadableCompanionFilename('."'%'".')) ')`
+    `execute('redraw!')`
+
 snippet cpp
 options head
     #include "${1:`expand("%:h:h:t")`}/${2:`expand("%:t:r")`}.h"
