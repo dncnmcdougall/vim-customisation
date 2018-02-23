@@ -1,0 +1,2 @@
+" Qmake
+setlocal commentstring=#\ %s
