@@ -316,6 +316,8 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     "Scrollbar
     "Tooltip
 
+    hi link cFunctionTag Function
+    hi link cTypeTag Function
     " syntax highlighting groups
     call <SID>X("Function", violetDull, "", "")
     call <SID>X("Comment", orange, "", "")
@@ -342,6 +344,9 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     " Indent guids
     call <SID>X("IndentGuidesOdd", "", base, "")
     call <SID>X("IndentGuidesEven", "",baseDull, "")
+
+    " Color Column
+    call <SID>X("ColorColumn", "", baseDull, "")
 else
     echo "Requires 256 colours"
 endif

@@ -1,0 +1,2 @@
+" JSON
+setlocal foldmethod=manual
