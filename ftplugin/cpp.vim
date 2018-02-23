@@ -1,4 +1,9 @@
 " Cpp
+if exists("b:did_my_ftplugin")
+    finish
+endif
+let b:did_mt_ftplugin = 1
+
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
 let g:cpp_experimental_template_highlight = 1
@@ -18,7 +23,7 @@ augroup fswitchAssosiations
 augroup END
 
 " lldb
-function SetBreakPoint(...)
+function! SetBreakPoint(...)
     let brk_pt = "b -f ". expand("%:p")." -l ".line(".")
     if a:0
         exe 'let @'.a:1.' = '.bkt_pt
@@ -27,4 +32,4 @@ function SetBreakPoint(...)
     endif
 endfunction
 
-command -register Lb call SetBreakPoint(<reg>)
+command! -register Lb call SetBreakPoint(<reg>)
