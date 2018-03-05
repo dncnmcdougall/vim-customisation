@@ -1,4 +1,9 @@
 " Qmake
+if exists("b:dmd_qmake_ftplugin")
+    finish
+endif
+let b:dmd_qmake_ftplugin = 1
+
 setlocal commentstring=#\ %s
 
 augroup fswitchAssosiations

@@ -1,4 +1,9 @@
 " latex
+if exists("b:dmd_tex_ftplugin")
+    finish
+endif
+let b:dmd_tex_ftplugin = 1
+
 let g:tex_flavor = "latex"
 let g:Tex_DefaultTargetFormat = "pdf"
 let g:Tex_CompileRule_pdf = "pdflatex -interaction=nonstopmode $*"

@@ -1,4 +1,9 @@
 " JavaScript
+if exists("b:dmd_javascript_ftplugin")
+    finish
+endif
+let b:dmd_javascript_ftplugin = 1
+
 javascript setlocal foldmethod=syntax 
 let g:javascript_fold = 1
 let g:javascript_enable_domhtmlcss = 1

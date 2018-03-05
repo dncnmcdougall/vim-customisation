@@ -1,4 +1,9 @@
 " Terminal
+if exists("b:dmd_term_ftplugin")
+    finish
+endif
+let b:dmd_term_ftplugin = 1
+
 setlocal nonumber
 
 " Terminal keys
