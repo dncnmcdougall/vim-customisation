@@ -1,8 +1,8 @@
 " Cpp
-if exists("b:did_my_ftplugin")
+if exists("b:dmd_cpp_ftplugin")
     finish
 endif
-let b:did_mt_ftplugin = 1
+let b:dmd_cpp_ftplugin = 1
 
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
