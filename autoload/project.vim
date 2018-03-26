@@ -23,11 +23,39 @@ function! project#ProjectCTagsExtraArgs(proj_root, proj_type)
     return project#ProjectInfo(a:proj_root, a:proj_type)['ctagsArgs']
 endfunction
 
+function! project#CreateFindFromExtensions(extensions)
+    let l:parts = []
+    for ext in a:extensions 
+        call add(l:parts,'-name "*.'.ext.'"')
+    endfor
+    
+    return 'find . '.join(l:parts, ' -o ')
+endfunction
+
+function! project#CreateAgGFromExtensions(extensions)
+    let l:parts = []
+    for ext in a:extensions 
+        call add(l:parts,'(.*\.'.ext.'$)')
+    endfor
+    
+    return "-G '".join(l:parts, '|')."'"
+endfunction
+
+function! project#CreateGrepFromExtensions(extensions)
+    let l:parts = []
+    for ext in a:extensions 
+        call add(l:parts,'--include "*.'.ext.'"')
+    endfor
+    
+    return join(l:parts, ' ')
+endfunction
+
 let s:projectInfo = {}
 
 call project#AddProjectInfo('default', {
             \   'fileCommand': 'find . -type f',
-            \   'ctagsArgs': []
+            \   'ctagsArgs': [],
+            \   'fileExtentions': []
             \})
 
 
