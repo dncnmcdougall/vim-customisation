@@ -1,7 +1,32 @@
-if exists('g:loaded_project')
+if exists('g:project_loaded')
   finish
 endif
-let g:loaded_project = 1
+let g:project_loaded = 1
+let g:cwd = getcwd()
+
+function! project#ProjectRoot(file_path)
+    if stridx(a:file_path,g:cwd) == 0
+        return g:cwd
+    else
+        return a:file_path
+    endif
+endfunction
+
+function! project#RelativeToRoot(file_path)
+    if stridx(a:file_path,g:cwd) == 0
+        return strpart(a:file_path, strlen(g:cwd)+1)
+    else
+        return a:file_path
+    endif
+endfunction
+
+function! project#IsBelowRoot(file_path)
+    if stridx(a:file_path,g:cwd) == 0
+        return 1
+    else
+        return 0
+    endif
+endfunction
 
 function! project#AddProjectInfo(type, info)
     let s:projectInfo[a:type] = a:info
