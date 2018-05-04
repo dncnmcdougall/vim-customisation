@@ -1,8 +1,3 @@
-if exists('g:project_loaded')
-  finish
-endif
-let g:project_loaded = 1
-let g:cwd = getcwd()
 
 function! project#ProjectRoot(file_path)
     if empty(a:file_path) || stridx(a:file_path,g:cwd) == 0
