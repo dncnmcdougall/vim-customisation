@@ -1,10 +1,33 @@
 
+let s:projectInfo = {}
+
+function! s:isBelow(root, file_path)
+    if stridx(a:file_path, a:root) == 0
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
 function! project#ProjectRoot(file_path)
-    if empty(a:file_path) || stridx(a:file_path,g:cwd) == 0
+    if empty(a:file_path) || s:isBelow(a:file_path,g:cwd)
         return g:cwd
     else
         return a:file_path
     endif
+endfunction
+
+function! project#RelativeToRoot(file_path)
+    let l:projectRoot = project#ProjectRoot(a:file_path)
+    if s:isBelow(a:file_path,  l:projectRoot)
+        return strpart(a:file_path, strlen(l:projectRoot)+1)
+    else
+        return a:file_path
+    endif
+endfunction
+
+function! project#IsBelowRoot(file_path)
+    return s:isBelow(a:file_path, project#ProjectRoot(a:file_path) )
 endfunction
 
 " This was taken out of vim-projectionist by T. Pope
@@ -45,21 +68,6 @@ function! project#ProjectType(proj_root)
     return 'default'
 endfunction
 
-function! project#RelativeToRoot(file_path)
-    if stridx(a:file_path,g:cwd) == 0
-        return strpart(a:file_path, strlen(g:cwd)+1)
-    else
-        return a:file_path
-    endif
-endfunction
-
-function! project#IsBelowRoot(file_path)
-    if stridx(a:file_path,g:cwd) == 0
-        return 1
-    else
-        return 0
-    endif
-endfunction
 
 function! project#AddProjectInfo(type, info)
     let s:projectInfo[a:type] = a:info
@@ -122,14 +130,5 @@ function! project#CreateSearchInFileCommand(proj_root, proj_type)
     return ''
 endfunction
 
-let s:projectInfo = {}
-
-call project#AddProjectInfo('default', {
-            \   'marker': '',
-            \   'isTypeFunction': '',
-            \   'fileCommand': 'find . -type f',
-            \   'ctagsArgs': [],
-            \   'fileExtentions': []
-            \})
 
 
