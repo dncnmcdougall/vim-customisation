@@ -5,11 +5,49 @@ let g:project_loaded = 1
 let g:cwd = getcwd()
 
 function! project#ProjectRoot(file_path)
-    if stridx(a:file_path,g:cwd) == 0
+    if empty(a:file_path) || stridx(a:file_path,g:cwd) == 0
         return g:cwd
     else
         return a:file_path
     endif
+endfunction
+
+" This was taken out of vim-projectionist by T. Pope
+function! s:rootHasFile(root, file) abort
+  let file = matchstr(a:file, '[^!].*')
+  if file =~# '\*'
+    let found = !empty(glob(a:root . '/' . file))
+  elseif file =~# '/$'
+    let found = isdirectory(a:root . '/' . file)
+  else
+    let found = filereadable(a:root . '/' . file)
+  endif
+  return a:file =~# '^!' ? !found : found
+endfunction
+
+" This was taken out of vim-projectionist by T. Pope
+function! s:evaluateMarker(root, marker)
+    for test in split(a:marker, '|')
+        if empty(filter(split(test, '&'), '!s:rootHasFile(a:root, v:val)'))
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
+
+function! project#ProjectType(proj_root)
+    for [type, info] in items(s:projectInfo)
+        let l:isTypeFunction = get(info, 'isTypeFunction', '')
+        if l:isTypeFunction != '' && call(l:isTypeFunction, [a:project_root])
+            return type
+        else
+            let l:marker = get(info, 'marker', '')
+            if l:marker != '' && s:evaluateMarker(a:proj_root, l:marker)
+                return type
+            endif
+        endif
+    endfor
+    return 'default'
 endfunction
 
 function! project#RelativeToRoot(file_path)
@@ -41,11 +79,11 @@ function! project#ProjectInfo(proj_root, proj_type)
 endfunction
 
 function! project#ProjectFilesCommand(proj_root, proj_type)
-    return project#ProjectInfo(a:proj_root, a:proj_type)['fileCommand']
+    return get(project#ProjectInfo(a:proj_root, a:proj_type),'fileCommand', 'find . -type f')
 endfunction
 
 function! project#ProjectCTagsExtraArgs(proj_root, proj_type)
-    return project#ProjectInfo(a:proj_root, a:proj_type)['ctagsArgs']
+    return get(project#ProjectInfo(a:proj_root, a:proj_type),'ctagsArgs', [])
 endfunction
 
 function! project#CreateFindFromExtensions(extensions)
@@ -75,9 +113,25 @@ function! project#CreateGrepFromExtensions(extensions)
     return join(l:parts, ' ')
 endfunction
 
+function! project#CreateSearchInFileCommand(proj_root, proj_type)
+    let l:project_info = project#ProjectInfo(proj_root, proj_type) 
+    let l:extensions = get(l:project_info, 'fileExtentions', []) 
+    if !empty(l:extensions)
+        if executable('ag')
+            return "ag --vimgrep ".project#CreateAgGFromExtensions(l:extensions)." ".a:symbol
+        else
+            return 'grep -H -n -r '.project#CreateGrepFromExtensions(l:extensions).' '.a:symbol
+        endif
+        exe ':cgetexpr system(l:searchString) | botright copen'
+    endif
+    return ''
+endfunction
+
 let s:projectInfo = {}
 
 call project#AddProjectInfo('default', {
+            \   'marker': '',
+            \   'isTypeFunction': '',
             \   'fileCommand': 'find . -type f',
             \   'ctagsArgs': [],
             \   'fileExtentions': []
