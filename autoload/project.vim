@@ -10,7 +10,7 @@ function! s:isBelow(root, file_path)
 endfunction
 
 function! project#ProjectRoot(file_path)
-    if empty(a:file_path) || s:isBelow(a:file_path,g:cwd)
+    if empty(a:file_path) || s:isBelow(g:cwd,a:file_path)
         return g:cwd
     else
         return a:file_path
@@ -19,7 +19,7 @@ endfunction
 
 function! project#RelativeToRoot(file_path)
     let l:projectRoot = project#ProjectRoot(a:file_path)
-    if s:isBelow(a:file_path,  l:projectRoot)
+    if s:isBelow(l:projectRoot, a:file_path)
         return strpart(a:file_path, strlen(l:projectRoot)+1)
     else
         return a:file_path
@@ -27,7 +27,7 @@ function! project#RelativeToRoot(file_path)
 endfunction
 
 function! project#IsBelowRoot(file_path)
-    return s:isBelow(a:file_path, project#ProjectRoot(a:file_path) )
+    return s:isBelow(project#ProjectRoot(a:file_path), a:file_path )
 endfunction
 
 " This was taken out of vim-projectionist by T. Pope
@@ -116,8 +116,8 @@ function! project#CreateGrepFromExtensions(extensions)
     return join(l:parts, ' ')
 endfunction
 
-function! project#CreateSearchInFileCommand(proj_root, proj_type)
-    let l:project_info = project#ProjectInfo(proj_root, proj_type) 
+function! project#CreateSearchInFileCommand(proj_root, proj_type, symbol)
+    let l:project_info = project#ProjectInfo(a:proj_root, a:proj_type) 
     let l:extensions = get(l:project_info, 'fileExtentions', []) 
     if !empty(l:extensions)
         if executable('ag')
