@@ -245,12 +245,19 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
         let violet  ="a64dff"
 
         let redDull     ="d75656"
-        let redDark     ="bf3030"
         let yellowDull  ="cd853f"
+        let orangeDull  ="d4640e"
         let greenDull   ="c0ffc0"
         let blueDull    ="308fbf"
         let blueLight   ="99ddff"
         let violetDull  ="a299ff"
+
+        let redDark     ="952525"
+        let blueDark    ="252595"
+        let greenDark   ="259525"
+        let cyanDark    ="258585"
+        let magentaDark ="852585"
+        let yellowDark  ="858525"
     else
         let contrast    ="808080"
         let contrastDull="8a8a8a"
@@ -298,7 +305,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Folded",contrast,baseDDull, "")
     call <SID>X("FoldColumn",contrast,baseDDull, "")
     call <SID>X("Search",contrastDull, yellowDull, "")
-    call <SID>X("IncSearch",orange, base, "")
+    call <SID>X("IncSearch",orangeDull, base, "")
     call <SID>X("LineNr", contrastDull, baseDDull,"")
     call <SID>X("ModeMsg",yellowDull, "", "")
     call <SID>X("MoreMsg",greenDull, "", "")
@@ -337,9 +344,10 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Ignore", baseDDull, "", "")
     "Error
     call <SID>X("Todo", red, yellow, "")
-    call <SID>X("SpellBad", "", redDull, "")
-    call <SID>X("SpellCap", "",blueDull, "")
-    " call <SID>X("SpellRare", "",magenta, "")
+    call <SID>X("SpellBad", "", redDark, "")
+    call <SID>X("SpellCap", "",blueDark, "")
+    call <SID>X("SpellRare", "",magentaDark, "")
+    call <SID>X("SpellLocal", "",cyanDark, "")
 
     " Indent guids
     call <SID>X("IndentGuidesOdd", "", base, "")
