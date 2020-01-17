@@ -254,7 +254,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 
         let redDark     ="952525"
         let blueDark    ="252595"
-        let greenDark   ="259525"
+        let greenDark   ="057505"
         let cyanDark    ="258585"
         let magentaDark ="852585"
         let yellowDark  ="858525"
@@ -296,10 +296,10 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     "CursorLine
     "CursorIM
     "Directory
-    "DiffAdd
-    "DiffChange
-    "DiffDelete
-    "DiffText
+    call <SID>X("DiffAdd","",greenDark,"")
+    call <SID>X("DiffChange","", blueDark,"")
+    call <SID>X("DiffDelete","", redDark,"")
+    call <SID>X("DiffText","",magentaDark,"")
     "ErrorMsg
     call <SID>X("VertSplit", contrast, contrast, "NONE")
     call <SID>X("Folded",contrast,baseDDull, "")
