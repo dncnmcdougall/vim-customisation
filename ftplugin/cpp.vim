@@ -4,6 +4,8 @@ if exists("b:dmd_cpp_ftplugin")
 endif
 let b:dmd_cpp_ftplugin = 1
 
+setlocal spell spelllang=en_gb
+
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
 let g:cpp_experimental_template_highlight = 1

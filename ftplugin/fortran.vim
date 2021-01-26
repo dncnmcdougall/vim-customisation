@@ -4,6 +4,8 @@ if exists("b:dmd_fortran_ftplugin")
 endif
 let b:dmd_fortran_ftplugin = 1
 
+setlocal spell spelllang=en_gb
+
 let fortran_fold=1
 let fortran_fold_conditionals=1
 let fortran_more_precise=1

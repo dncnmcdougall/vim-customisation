@@ -5,6 +5,7 @@ endif
 let b:dmd_term_ftplugin = 1
 
 setlocal nonumber
+setlocal nospell
 
 " Terminal keys
 tnoremap <Esc> <C-\><C-n>
