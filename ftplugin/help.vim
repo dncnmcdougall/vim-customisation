@@ -1,6 +1,6 @@
 " help
 if exists("b:dmd_help_ftplugin")
-    finihelp
+    finish
 endif
 let b:dmd_help_ftplugin = 1
 

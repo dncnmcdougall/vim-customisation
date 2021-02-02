@@ -1,6 +1,6 @@
 " java
 if exists("b:dmd_java_ftplugin")
-    finijava
+    finish
 endif
 let b:dmd_java_ftplugin = 1
 
