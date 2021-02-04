@@ -4,4 +4,4 @@ if exists("b:dmd_sh_ftplugin")
 endif
 let b:dmd_sh_ftplugin = 1
 
-setlocal spell spelllang=en_gb
+setlocal spell 

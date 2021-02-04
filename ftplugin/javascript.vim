@@ -5,7 +5,7 @@ endif
 let b:dmd_javascript_ftplugin = 1
 
 setlocal foldmethod=syntax 
-setlocal spell spelllang=en_gb
+setlocal spell
 
 let g:javascript_fold = 1
 let g:javascript_enable_domhtmlcss = 1

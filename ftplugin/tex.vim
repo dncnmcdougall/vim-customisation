@@ -5,7 +5,7 @@ endif
 let b:dmd_tex_ftplugin = 1
 
 setlocal tw=80
-setlocal spell spelllang=en_gb
+setlocal spell 
 
 let g:tex_flavor = "latex"
 let g:Tex_DefaultTargetFormat = "pdf"
