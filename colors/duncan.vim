@@ -228,8 +228,8 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     " }}}
 
     if &background == "dark"
-        let contrast    ="ffffff"
-        let contrastDull="f5deb3"
+        let contrast    ="e6e6e6"
+        let contrastDull="dcc7a0"
 
         let base    ="000000"
         let baseDDull="444444"
@@ -287,6 +287,11 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 
 
     call <SID>X("Normal", contrast, base, "")
+    call <SID>X("Bold", contrastDull, baseDull, "bold")
+    call <SID>X("Italic", contrast, base, "italic,underline")
+    call <SID>X("BoldItalic", contrastDull, baseDull, "bold,italic,underline")
+    
+    call <SID>X("htmlLink", blueDull, base, "")
 
     " highlight groups
     call <SID>X("Cursor", "", "", "reverse")
@@ -355,6 +360,11 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 
     " Color Column
     call <SID>X("ColorColumn", "", baseDull, "")
+
+    hi link htmlBold Bold
+    hi link htmlItalic Italic
+    hi link htmlBoldItalic BoldItalic
+
 else
     echo "Requires 256 colours"
 endif
