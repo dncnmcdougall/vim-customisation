@@ -5,7 +5,7 @@ endif
 let b:dmd_python_ftplugin = 1
 
 setlocal errorformat=%f:%l:\ %m
-setlocal spell 
+setlocal nospell 
 setlocal foldmethod=indent
 
 let s:additional_options=""
