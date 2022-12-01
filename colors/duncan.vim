@@ -288,8 +288,8 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 
     call <SID>X("Normal", contrast, base, "")
     call <SID>X("Bold", contrastDull, baseDull, "bold")
-    call <SID>X("Italic", contrast, base, "italic,underline")
-    call <SID>X("BoldItalic", contrastDull, baseDull, "bold,italic,underline")
+    call <SID>X("Italic", contrast, base, "italic")
+    call <SID>X("BoldItalic", contrastDull, baseDull, "bold,italic")
     
     call <SID>X("htmlLink", blueDull, base, "")
 
@@ -335,13 +335,14 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Comment", orange, "", "")
     call <SID>X("Constant", red, "", "")
     call <SID>X("String", green,"","")
+    call <SID>X("Variable",contrast, "", "none")
     call <SID>X("Identifier",greenDull, "", "none")
     call <SID>X("Statement", violet, "", "bold")
     call <SID>X("PreProc", yellow, "", "")
-    call <SID>X("Type", magenta, "", "none")
+    call <SID>X("Primitive", magenta, "", "none")
+    call <SID>X("Type", blueLight, "", "none")
+    call <SID>X("Namespace", blueLight, "", "")
     call <SID>X("Special", yellow, "", "")
-    call <SID>X("cCustomClass", blueLight, "", "")
-    call <SID>X("cCustomNamespace", blueLight, "", "")
     " hi link cCustomAngleBrackets cCustomClass
     call <SID>X("cCustomAngleBracketContent", greenDull, "", "")
     call <SID>X("cCustomAngleBrackets", greenDull, "", "bold")
@@ -360,6 +361,12 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 
     " Color Column
     call <SID>X("ColorColumn", "", baseDull, "")
+
+    "popup menu
+    call <SID>X("PMenu", contrastDull, baseDull, "")
+    call <SID>X("PMenuSel", baseDull,contrastDull, "")
+    call <SID>X("PMenuSbar", contrastDull,baseDull, "")
+    call <SID>X("PMenuThumb", baseDull,contrastDull, "")
 
     hi link htmlBold Bold
     hi link htmlItalic Italic
