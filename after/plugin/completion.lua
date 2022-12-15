@@ -1,5 +1,4 @@
 -- nvim-cmp
-print("Loaded completion.lua")
 local cmp = require'cmp'
 local lspkind = require'lspkind'
 
@@ -96,10 +95,23 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmp.mapping.preset.cmdline({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<CR>'] = function(fallback)
+            if cmp.visible() then 
+                cmp.confirm({ select = true }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            else
+                fallback()
+            end
+        end,
+        ['<C-J>'] = cmp.mapping.complete(),
+    }),
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
-            { name = 'cmdline' }
+            { name = 'cmdline', keyword_length=3 }
         })
 })

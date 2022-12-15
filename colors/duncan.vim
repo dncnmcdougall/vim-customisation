@@ -314,7 +314,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("LineNr", contrastDull, baseDDull,"")
     call <SID>X("ModeMsg",yellowDull, "", "")
     call <SID>X("MoreMsg",greenDull, "", "")
-    call <SID>X("NonText",contrastDull, base, "bold")
+    call <SID>X("NonText",baseDull, base, "")
     call <SID>X("Question",green, "", "")
     call <SID>X("SpecialKey",green, "", "")
     " call <SID>X("StatusLine", "b2cfc5", base, "reverse")
