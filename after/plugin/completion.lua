@@ -33,7 +33,7 @@ cmp.setup({
         --         fallback()
         --     end
         -- end,
-        ['<CR>'] = function(fallback)
+        ['<tab>'] = function(fallback)
             if cmp.visible() then 
                 cmp.confirm({ select = true }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             else
@@ -44,9 +44,9 @@ cmp.setup({
     }),
     sources = cmp.config.sources(
         {
-            -- { name = 'nvim_lsp' },
+            { name = 'nvim_lsp' },
             { name = 'luasnip' }, -- For luasnip users.
-        }, 
+        },
         {
             { name = 'treesitter', keyword_length=3 },
         },
@@ -54,28 +54,28 @@ cmp.setup({
             { name = 'buffer', keyword_length=3 },
         },
         {
-        {
-            name = 'spell',
-            keyword_length=3,
-            option = {
-                keep_all_entries = false,
-                enable_in_context = function()
-                    return true
-                end,
-            },
-        }
+        -- {
+        --     name = 'spell',
+        --     keyword_length=3,
+        --     option = {
+        --         keep_all_entries = false,
+        --         enable_in_context = function()
+        --             return true
+        --         end,
+        --     },
+        -- }
         }
     ),
     formatting = {
         format = lspkind.cmp_format({
             with_text= true,
-            with_text= true,
             menu = {
+                lsp = '[lsp]',
                 treesitter = '[tree]',
                 buffer = '[buf]',
                 luasnip = '[snip]',
                 path = '[path]',
-                spell = '[spell]',
+                -- spell = '[spell]',
             }
         })
     },
