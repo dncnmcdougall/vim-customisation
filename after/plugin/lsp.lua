@@ -46,7 +46,6 @@ end
 local servers = {
     clangd = {},
     pyright = {},
-    mypy = {},
     ltex = {},
     texlab = {},
     lua_ls = {
