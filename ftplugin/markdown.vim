@@ -4,9 +4,8 @@ if exists("b:dmd_markdown_ftplugin")
 endif
 let b:dmd_markdown_ftplugin = 1
 
-setlocal tw=80
+setlocal textwidth=80
 setlocal spell 
-
 
 if v:lua.zettelkasten.contains(expand('%'))
     setlocal tagfunc=v:lua.zettelkasten.tagfunc

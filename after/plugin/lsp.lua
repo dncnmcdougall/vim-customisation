@@ -46,7 +46,10 @@ end
 local servers = {
     clangd = {},
     pyright = {},
-    sumneko_lua = {
+    mypy = {},
+    ltex = {},
+    texlab = {},
+    lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },

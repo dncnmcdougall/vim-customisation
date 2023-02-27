@@ -4,5 +4,5 @@ if exists("b:dmd_thoughtbox_ftplugin")
 endif
 let b:dmd_thoughtbox_ftplugin = 1
 
-setlocal tw=80
+setlocal textwidth=80
 setlocal spell
