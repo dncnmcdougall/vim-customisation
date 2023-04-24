@@ -7,7 +7,7 @@ let b:dmd_markdown_ftplugin = 1
 setlocal textwidth=80
 setlocal spell 
 
-if v:lua.zettelkasten.contains(expand('%'))
+if v:lua.require('zettelkasten').contains(expand('%'))
     setlocal tagfunc=v:lua.zettelkasten.tagfunc
     setlocal isfname+=-,:
     setlocal iskeyword+=:,-
