@@ -287,6 +287,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 
 
     call <SID>X("Normal", contrast, base, "")
+    call <SID>X("NonText", contrast, base, "")
     call <SID>X("Bold", contrastDull, baseDull, "bold")
     call <SID>X("Italic", contrast, base, "italic")
     call <SID>X("BoldItalic", contrastDull, baseDull, "bold,italic")
