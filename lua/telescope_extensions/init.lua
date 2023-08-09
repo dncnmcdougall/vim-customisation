@@ -19,7 +19,6 @@ function module.add_picker(modes, shortcut, func, name)
     end
     table.insert(pickers[shortcut].funcs, func)
     table.insert(pickers[shortcut].names, name)
-    print(vim.inspect(pickers))
 end
 
 function module.pop_picker_func(shortcut)
@@ -30,8 +29,6 @@ function module.pop_picker_func(shortcut)
     if picker.index > #picker.funcs then
         picker.index = 1
     end
-
-    print('finding picker: '..tostring(picker.index))
 
     local func = picker.funcs[picker.index]
     picker.index = picker.index +1
