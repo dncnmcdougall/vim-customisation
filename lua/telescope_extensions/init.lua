@@ -1,3 +1,6 @@
+local actions = require "telescope.actions"
+local actions_state = require "telescope.actions.state"
+
 local module = {}
 
 local pickers = {}
@@ -35,14 +38,22 @@ function module.pop_picker_func(shortcut)
     return func
 end
 
+function module.reset_picker_index(shortcut)
+    if pickers[shortcut] ~= nil then
+        pickers[shortcut].index = 1
+    end
+end
+
 function module.open_picker(shortcut, prompt_bufnr)
 
     local prompt=nil
 
     if prompt_bufnr ~= nil then
-        local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+        local picker = actions_state.get_current_picker(prompt_bufnr)
         prompt = picker:_get_prompt()
-        require('telescope.actions').close(prompt_bufnr)
+        actions.close(prompt_bufnr)
+    else
+        module.reset_picker_index(shortcut)
     end
 
     local opts = { attach_mappings = function(_, map)
